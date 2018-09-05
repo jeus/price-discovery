@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/price")
@@ -27,14 +28,14 @@ public class Price {
     RestTemplateBuilder restTemplateBuilder;
 
     @GetMapping("/btc")
-    public String getPrice() {
+    public List<com.b2mark.priceDiscovery.entity.Price> getPrice() {
         Driver driver = new Coinmarketcap(restTemplateBuilder);
         try {
-            ((Coinmarketcap) driver).getBtcPrice1();
+          return ((Coinmarketcap) driver).getBtcPrice();
         } catch (IOException ex) {
 
         }
-        return "ok";
+        return null;
     }
 
 

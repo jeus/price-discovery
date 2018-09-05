@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import sun.java2d.cmm.Profile;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -41,10 +42,10 @@ public class Coinmarketcap extends Driver {
         return false;
     }
 
-    public String getBtcPrice() throws IOException {
-        Date date = new Date();
+    public List<Price> getBtcPrice() throws IOException {
         List<Price> priceList = new ArrayList<>();
         ResponseEntity<String> response = restTemplate.getForEntity(endpoint, String.class);
+        Date date = new Date();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.getBody());
         JsonNode root1 = root.findPath("data");
@@ -52,7 +53,7 @@ public class Coinmarketcap extends Driver {
         String name = root3.findPath("name").asText();
         String symbol = root3.findPath("symbol").asText();
         JsonNode root4 = root3.findPath("quotes");
-        Iterator<String> strQueue = root.fieldNames();
+        Iterator<String> strQueue = root4.fieldNames();
         while (strQueue.hasNext()) {
             Price price = new Price();
             price.setDate(date);
@@ -62,8 +63,9 @@ public class Coinmarketcap extends Driver {
             price.setDestSymbol(strDestSymbol);
             String priceStr = root4.findPath(strDestSymbol).findPath("price").asText();
             price.setPrice(priceStr);
+            priceList.add(price);
         }
-        return "OK";
+        return priceList;
     }
 
 
@@ -81,6 +83,7 @@ public class Coinmarketcap extends Driver {
         System.out.println(price);
         return "OK";
     }
+
 
 
 }
