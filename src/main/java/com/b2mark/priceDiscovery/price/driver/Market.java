@@ -6,7 +6,7 @@
  * @since 2018
  */
 
-package com.b2mark.priceDiscovery.driver;
+package com.b2mark.priceDiscovery.price.driver;
 
 public interface Market {
     public void getPrice(String curency1, String curency2);

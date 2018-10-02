@@ -8,32 +8,52 @@
 
 package com.b2mark.priceDiscovery.crowler.drivers;
 
-import com.b2mark.priceDiscovery.entity.Price;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import com.b2mark.priceDiscovery.common.Coin;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
 public abstract class Driver {
 
+    protected String drivername;
     protected String endpoint;
     protected RestTemplate restTemplate;
+    protected Coin[] supporterdCoin;
 
-    public Driver(){
-
+    protected void sortSupportCoin() {
+        int n = supporterdCoin.length;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+                if (supporterdCoin[j].getId() > supporterdCoin[j + 1].getId()) {
+                    // swap temp and arr[i]
+                    Coin temp = supporterdCoin[j];
+                    supporterdCoin[j] = supporterdCoin[j + 1];
+                    supporterdCoin[j + 1] = temp;
+                }
     }
 
-    private List<Price> currencyPrices;
+    protected int coinSupported(Coin coin) {
+        System.out.println("JEUS FIND--------");
+        int l = 0, r = supporterdCoin.length - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            System.out.println("JEUS FIND--------∆∆∆∆∆∆∆∆∆∆∆");
 
+            // Check if x is present at mid
+            if (supporterdCoin[m].getId() == coin.getId())
+                return supporterdCoin[m].getId();
 
-    protected abstract boolean crowl();
+            System.out.println("JEUS FIND--------∆∆∆∆∆∆∆∆∆∆∆");
+            // If x greater, ignore left half
+            if (supporterdCoin[m].getId() < coin.getId())
+                l = m + 1;
 
-    public void addPrices(Price price) {
-        currencyPrices.add(price);
+                // If x is smaller, ignore right half
+            else
+                r = m - 1;
+        }
+
+        return -1;
     }
 
-    public List<Price> getPrice() {
-        return currencyPrices;
-    }
 
 }

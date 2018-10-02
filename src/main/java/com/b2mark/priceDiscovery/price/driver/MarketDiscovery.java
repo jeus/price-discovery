@@ -6,12 +6,12 @@
  * @since 2018
  */
 
-package com.b2mark.priceDiscovery.driver;
+package com.b2mark.priceDiscovery.price.driver;
 
-import com.b2mark.priceDiscovery.driver.adapter.Btc;
-import com.b2mark.priceDiscovery.driver.adapter.Irr;
-import com.b2mark.priceDiscovery.driver.adapter.PriceAdapter;
-import com.b2mark.priceDiscovery.driver.adapter.Usd;
+import com.b2mark.priceDiscovery.price.driver.adapter.Btc;
+import com.b2mark.priceDiscovery.price.driver.adapter.Irr;
+import com.b2mark.priceDiscovery.price.driver.adapter.PriceAdapter;
+import com.b2mark.priceDiscovery.price.driver.adapter.Usd;
 import com.b2mark.priceDiscovery.entity.Price;
 
 public class MarketDiscovery implements Market {
