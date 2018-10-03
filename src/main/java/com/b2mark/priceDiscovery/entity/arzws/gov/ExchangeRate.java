@@ -4,12 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.b2mark.priceDiscovery.common.Coin;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +32,7 @@ public String name;
 @JsonProperty("icon")
 public String icon;
 @JsonProperty("current")
+@JsonAlias({"price", "current"})
 public Double current;
 @JsonProperty("minVal")
 public Double minVal;

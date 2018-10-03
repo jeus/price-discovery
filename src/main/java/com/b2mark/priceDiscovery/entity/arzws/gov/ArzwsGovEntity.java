@@ -28,7 +28,7 @@ public class ArzwsGovEntity {
     @JsonProperty("validationCheckResult")
     public ValidationCheckResult validationCheckResult;
     @JsonProperty("exchangeRate")
-    @JsonAlias({"currencyBoard", "bazarExchange"})
+    @JsonAlias({"currencyBoard", "bazarExchange" ,"cryptoBoard"})
     public List<ExchangeRate> exchangeRate = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();

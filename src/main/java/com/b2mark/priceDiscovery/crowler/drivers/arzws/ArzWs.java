@@ -76,13 +76,15 @@ public abstract class ArzWs extends Driver implements DriverInterface {
 
     private Price convertToPrice(ExchangeRate exchangeRate) {
         Price price = new Price();
-        Coin coin = Coin.fromSymbol(exchangeRate.getIcon().length() > 3 ? map.get(exchangeRate.getIcon()) : exchangeRate.getIcon());
-        if (coin != null && isSupport(coin) > 0) {
+        Coin sourceCoin = Coin.fromSymbol(exchangeRate.getIcon().length() > 3 ? map.get(exchangeRate.getIcon()) : exchangeRate.getIcon());
+        Coin destCoin = Coin.IRANRIAL;
+        if(drivername.equals("arzws-crypto")){ destCoin = Coin.USDOLLAR;}
+        if (sourceCoin != null && isSupport(sourceCoin) > 0) {
             Date date = new Date((exchangeRate.getDateSerial() - TICKS_AT_EPOCH) / TICKS_PER_MILLISECOND);
             price.setDate(date);
-            price.setCoin(coin);
+            price.setCoin(sourceCoin);
             price.setPrice(Double.toString(exchangeRate.getCurrent()));
-            price.setDestCoin(Coin.IRANRIAL);
+            price.setDestCoin(destCoin);
             price.setDriverName(drivername);
             return price;
         } else {
