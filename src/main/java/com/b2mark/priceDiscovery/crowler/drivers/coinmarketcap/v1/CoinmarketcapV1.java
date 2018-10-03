@@ -38,7 +38,7 @@ public class CoinmarketcapV1 extends Driver implements DriverInterface {
        List<Price> prices = new ArrayList<>();
         for(Coin coins1 : coins)
         {
-            if(coinSupported(coins1) > 0) {
+            if(isSupport(coins1) > 0) {
                 Coinmarketcap[] coinmarketcap = null;
                 try {
                      coinmarketcap = restTemplate.getForObject(endpoint, Coinmarketcap[].class);

@@ -16,7 +16,12 @@ import reactor.util.annotation.Nullable;
 public enum Coin {
     BITCOIN(1, "bitcoin","BTC",Type.CRYPTO),
     ETHEREUM(2, "ethereum","ETH",Type.CRYPTO),
-    USDOLLAR(3, "usdollar","USD",Type.FIAT);
+    USDOLLAR(3, "usdollar","USD",Type.FIAT),
+    IRANRIAL(4,"iranrial","IRR",Type.FIAT),
+    SYRIANPOUND(5,"syrianpound"	,"SYP",Type.FIAT),
+    EURO(6,"euro","EUR",Type.FIAT);//SYRIAN ARAB REPUBLIC
+
+
 
 
     private final int id;

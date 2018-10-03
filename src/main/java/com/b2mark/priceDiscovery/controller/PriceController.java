@@ -11,6 +11,8 @@ package com.b2mark.priceDiscovery.controller;
 
 import com.b2mark.priceDiscovery.common.Coin;
 import com.b2mark.priceDiscovery.crowler.drivers.DriverInterface;
+import com.b2mark.priceDiscovery.crowler.drivers.arzws.gov.ArzWsGov;
+import com.b2mark.priceDiscovery.crowler.drivers.arzws.market.ArzWsMarket;
 import com.b2mark.priceDiscovery.crowler.drivers.coinmarketcap.v1.CoinmarketcapV1;
 import com.b2mark.priceDiscovery.entity.Price;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,31 @@ public class PriceController {
         DriverInterface driver = new CoinmarketcapV1(restTemplateBuilder);
         try {
             return  driver.crowl(Coin.BITCOIN);
+        } catch (Exception ex) {
+            System.out.println("JEUSDEBUG: This is get errrroooooorrr");
+        }
+        return null;
+    }
+
+
+
+    @GetMapping("/arzwsgov")
+    public List<Price> getPriceArzwsGov() {
+        DriverInterface driver = new ArzWsGov(restTemplateBuilder);
+        try {
+            return  driver.crowl(Coin.USDOLLAR);
+        } catch (Exception ex) {
+            System.out.println("JEUSDEBUG: This is get errrroooooorrr");
+        }
+        return null;
+    }
+
+
+    @GetMapping("/arzwsmark")
+    public List<Price> getPriceArzwsMarket() {
+        DriverInterface driver = new ArzWsMarket(restTemplateBuilder);
+        try {
+            return  driver.crowl(Coin.USDOLLAR);
         } catch (Exception ex) {
             System.out.println("JEUSDEBUG: This is get errrroooooorrr");
         }

@@ -31,22 +31,17 @@ public abstract class Driver {
                 }
     }
 
-    protected int coinSupported(Coin coin) {
+    protected int isSupport(Coin coin) {
         System.out.println("JEUS FIND--------");
         int l = 0, r = supporterdCoin.length - 1;
         while (l <= r) {
             int m = l + (r - l) / 2;
-            System.out.println("JEUS FIND--------∆∆∆∆∆∆∆∆∆∆∆");
-
             // Check if x is present at mid
             if (supporterdCoin[m].getId() == coin.getId())
                 return supporterdCoin[m].getId();
-
-            System.out.println("JEUS FIND--------∆∆∆∆∆∆∆∆∆∆∆");
             // If x greater, ignore left half
             if (supporterdCoin[m].getId() < coin.getId())
                 l = m + 1;
-
                 // If x is smaller, ignore right half
             else
                 r = m - 1;
