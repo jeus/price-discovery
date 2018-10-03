@@ -1,12 +1,17 @@
-package com.b2mark.priceDiscovery.entity.arzws.market;
-
-import com.b2mark.priceDiscovery.common.Coin;
-import com.fasterxml.jackson.annotation.*;
-import lombok.Getter;
-import lombok.Setter;
+package com.b2mark.priceDiscovery.entity.arzws.gov;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.b2mark.priceDiscovery.common.Coin;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.Getter;
+import lombok.Setter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -23,7 +28,7 @@ import java.util.Map;
 })
 @Setter
 @Getter
-public class BazarExchange {
+public class ExchangeRate {
 
 @JsonProperty("id")
 public Long id;

@@ -19,7 +19,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "validationCheckResult",
-        "currencyBoard"
+        "exchangeRate"
 })
 @Setter
 @Getter
@@ -27,9 +27,9 @@ public class ArzwsGovEntity {
 
     @JsonProperty("validationCheckResult")
     public ValidationCheckResult validationCheckResult;
-    @JsonProperty("price")
+    @JsonProperty("exchangeRate")
     @JsonAlias({"currencyBoard", "bazarExchange"})
-    public List<CurrencyBoard> currencyBoard = null;
+    public List<ExchangeRate> exchangeRate = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

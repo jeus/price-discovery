@@ -13,9 +13,7 @@ import com.b2mark.priceDiscovery.crowler.drivers.Driver;
 import com.b2mark.priceDiscovery.crowler.drivers.DriverInterface;
 import com.b2mark.priceDiscovery.entity.Price;
 import com.b2mark.priceDiscovery.entity.arzws.gov.ArzwsGovEntity;
-import com.b2mark.priceDiscovery.entity.arzws.gov.CurrencyBoard;
-import com.b2mark.priceDiscovery.entity.arzws.market.ArzWsMarketEntity;
-import com.b2mark.priceDiscovery.entity.arzws.market.BazarExchange;
+import com.b2mark.priceDiscovery.entity.arzws.gov.ExchangeRate;
 
 import java.util.*;
 
@@ -66,9 +64,9 @@ public abstract class ArzWs extends Driver implements DriverInterface {
         } catch (Exception ex) {
             System.out.println("JEUSDEBUG: ERROR   " + ex.getMessage());
         }
-        System.out.println("JEUSDEBUG:     " + arzwsGovEntity.getCurrencyBoard().toString());
-        for (CurrencyBoard currencyBoard : arzwsGovEntity.getCurrencyBoard()) {
-            Price price = convertToPrice(currencyBoard);
+        System.out.println("JEUSDEBUG:     " + arzwsGovEntity.getExchangeRate().toString());
+        for (ExchangeRate exchangeRate : arzwsGovEntity.getExchangeRate()) {
+            Price price = convertToPrice(exchangeRate);
             if (price != null) {
                 prices.add(price);
             }
@@ -76,14 +74,14 @@ public abstract class ArzWs extends Driver implements DriverInterface {
         return prices;
     }
 
-    private Price convertToPrice(CurrencyBoard currencyBoard) {
+    private Price convertToPrice(ExchangeRate exchangeRate) {
         Price price = new Price();
-        Coin coin = Coin.fromSymbol(currencyBoard.getIcon().length() > 3 ? map.get(currencyBoard.getIcon()) : currencyBoard.getIcon());
+        Coin coin = Coin.fromSymbol(exchangeRate.getIcon().length() > 3 ? map.get(exchangeRate.getIcon()) : exchangeRate.getIcon());
         if (coin != null && isSupport(coin) > 0) {
-            Date date = new Date((currencyBoard.getDateSerial() - TICKS_AT_EPOCH) / TICKS_PER_MILLISECOND);
+            Date date = new Date((exchangeRate.getDateSerial() - TICKS_AT_EPOCH) / TICKS_PER_MILLISECOND);
             price.setDate(date);
             price.setCoin(coin);
-            price.setPrice(Double.toString(currencyBoard.getCurrent()));
+            price.setPrice(Double.toString(exchangeRate.getCurrent()));
             price.setDestCoin(Coin.IRANRIAL);
             price.setDriverName(drivername);
             return price;
