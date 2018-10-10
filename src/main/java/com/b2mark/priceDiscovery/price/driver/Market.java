@@ -8,6 +8,9 @@
 
 package com.b2mark.priceDiscovery.price.driver;
 
+import com.b2mark.priceDiscovery.common.Coin;
+import com.b2mark.priceDiscovery.entity.Price;
+
 public interface Market {
-    public void getPrice(String curency1, String curency2);
+    public Price getPrice(Coin coin1, Coin coin2);
 }

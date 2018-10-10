@@ -8,31 +8,36 @@
 
 package com.b2mark.priceDiscovery.price.driver;
 
+import com.b2mark.priceDiscovery.common.Coin;
+import com.b2mark.priceDiscovery.entity.Price;
 import com.b2mark.priceDiscovery.price.driver.adapter.Btc;
 import com.b2mark.priceDiscovery.price.driver.adapter.Irr;
 import com.b2mark.priceDiscovery.price.driver.adapter.PriceAdapter;
 import com.b2mark.priceDiscovery.price.driver.adapter.Usd;
-import com.b2mark.priceDiscovery.entity.Price;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MarketDiscovery implements Market {
 
     @Override
-    public void getPrice(String currency1, String currency2) {
-        PriceAdapter priceAdapter;
-        switch (currency1) {
-            case "Irr":
+    public Price getPrice(Coin coin1, Coin coin2) {
+        Price price =  null;
+        PriceAdapter priceAdapter = null;
+        switch (coin1) {
+            case IRANRIAL:
                 priceAdapter = new Irr();
-                toCurrency(priceAdapter, currency2);
+                 toCurrency(priceAdapter, coin2);
                 break;
-            case "Usd":
+            case USDOLLAR:
                 priceAdapter = new Usd();
-                toCurrency(priceAdapter, currency2);
+                toCurrency(priceAdapter, coin2);
                 break;
-            case "Btc":
+            case BITCOIN:
                 priceAdapter = new Btc();
-                toCurrency(priceAdapter, currency2);
+                toCurrency(priceAdapter, coin2);
                 break;
         }
+        return price;
     }
 
 
@@ -40,15 +45,15 @@ public class MarketDiscovery implements Market {
      * get methods by priceAdapter and call method peer that.
      *
      * @param priceAdapter
-     * @param currency2
+     * @param coin2
      */
-    private Price toCurrency(PriceAdapter priceAdapter, String currency2) {
-        switch (currency2) {
-            case "Irr":
+    private Price toCurrency(PriceAdapter priceAdapter, Coin coin2) {
+        switch (coin2) {
+            case IRANRIAL:
                 return priceAdapter.priceToIrr();
-            case "Usd":
+            case USDOLLAR:
                 return priceAdapter.priceToUsd();
-            case "Btc":
+            case BITCOIN:
                 return priceAdapter.priceToBtc();
             default:
                 return null;//"this currency is not valid";

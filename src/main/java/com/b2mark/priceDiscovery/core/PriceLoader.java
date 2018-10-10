@@ -1,8 +1,6 @@
 package com.b2mark.priceDiscovery.core;
 
-import com.b2mark.priceDiscovery.entity.Price;
-import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
-import org.springframework.data.redis.core.ReactiveRedisOperations;
+import com.b2mark.priceDiscovery.entity.Price;;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 

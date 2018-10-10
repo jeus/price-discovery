@@ -30,7 +30,6 @@ public class Price {
     String price;
     String driverName;
 
-
     /**
      * create id by format [symbol]_to_[destSymbol]
      * @return

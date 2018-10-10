@@ -12,8 +12,9 @@ import com.b2mark.priceDiscovery.common.Coin;
 import com.b2mark.priceDiscovery.crowler.drivers.Driver;
 import com.b2mark.priceDiscovery.crowler.drivers.DriverInterface;
 import com.b2mark.priceDiscovery.entity.Price;
-import com.b2mark.priceDiscovery.entity.arzws.gov.ArzwsGovEntity;
 import com.b2mark.priceDiscovery.entity.arzws.gov.ExchangeRate;
+import com.b2mark.priceDiscovery.entity.arzws.gov.ArzwsGovEntity;
+
 
 import java.util.*;
 

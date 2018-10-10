@@ -11,8 +11,7 @@ package com.b2mark.priceDiscovery.entity.coinmarketcap;
 import com.b2mark.priceDiscovery.common.Coin;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;

@@ -24,7 +24,7 @@ public class ArzWsCrypto extends ArzWs {
     public ArzWsCrypto(RestTemplateBuilder restTemplateBuilder) {
         super();
         drivername = "arzws-crypto";
-        endpoint = "http://core.arzws.com/api/core?Token=78cd7981-c23d-4f84-6995-08d627c4638e&what=crypto";
+        endpoint = "http://core.arzws.ir/api/core?Token=78cd7981-c23d-4f84-6995-08d627c4638e&what=crypto";
         restTemplate = restTemplateBuilder.build();
         supporterdCoin = new Coin[]{Coin.BITCOIN,Coin.ETHEREUM};
         sortSupportCoin();

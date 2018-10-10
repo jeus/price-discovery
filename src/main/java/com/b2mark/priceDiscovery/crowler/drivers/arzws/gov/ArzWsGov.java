@@ -23,7 +23,7 @@ public class ArzWsGov extends ArzWs {
     public ArzWsGov(RestTemplateBuilder restTemplateBuilder) {
         super();
         drivername = "arzws-gov";
-        endpoint = "http://core.arzws.com/api/core?Token=78cd7981-c23d-4f84-6995-08d627c4638e&what=exchange";
+        endpoint = "http://core.arzws.ir/api/core?Token=78cd7981-c23d-4f84-6995-08d627c4638e&what=exchange";
         restTemplate = restTemplateBuilder.build();
         supporterdCoin = new Coin[]{Coin.IRANRIAL,Coin.USDOLLAR,Coin.SYRIANPOUND};
         sortSupportCoin();
