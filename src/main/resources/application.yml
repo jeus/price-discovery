@@ -1,7 +1,7 @@
 info:
   app:
     desc: Price Discovery Service
-    name: priceDiscovery
+    name: pricediscovery
     version: 1.0
     license: becopay
     contact:
@@ -19,7 +19,14 @@ logging:
     org:
       springframework:
         security: DEBUG
-
+spring:
+  cloud:
+    refresh:
+      enabled: false
+  profiles:
+    active: production
+  application:
+      name: pricediscovery
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
