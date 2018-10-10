@@ -166,10 +166,10 @@ BigDecimal bigDecimal = new BigDecimal("0.95");
 
         return price;
     }
-//
-//    @GetMapping("/price")
-//    public Flux<Price> all() {
-//        return priceOps.keys("*").flatMap(priceOps.opsForValue()::get);
-//    }
+
+    @GetMapping("/check")
+    public String check() {
+        return "THIS IS LAST VERSION 1";
+    }
 
 }
