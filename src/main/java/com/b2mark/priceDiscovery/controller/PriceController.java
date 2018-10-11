@@ -89,7 +89,10 @@ public class PriceController {
         }
         return null;
     }
-
+    @GetMapping("/tbtcirr")
+    public Price getTbtcRial() {
+       return getBtcRial();
+    }
 
     @GetMapping("/btcirr")
     public Price getBtcRial() {
