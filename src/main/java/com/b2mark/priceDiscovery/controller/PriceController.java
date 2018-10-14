@@ -122,7 +122,7 @@ public class PriceController {
         BigDecimal bdBtcUsd = new BigDecimal(crypto.getPrice());
         BigDecimal bdUsdRial = new BigDecimal(market.getPrice());
 
-BigDecimal bigDecimal = new BigDecimal("0.95");
+        BigDecimal bigDecimal = new BigDecimal("0.99");
         BigDecimal bdBtcRial = bdBtcUsd.multiply(bdUsdRial).multiply(bigDecimal);
 
         System.out.println("JEUSDEBUG: ======> "+bdBtcRial.toString());
@@ -161,7 +161,7 @@ BigDecimal bigDecimal = new BigDecimal("0.95");
         BigDecimal bdEthUsd = new BigDecimal(crypto.getPrice());
         BigDecimal bdUsdRial = new BigDecimal(market.getPrice());
 
-        BigDecimal bigDecimal = new BigDecimal("0.95");
+        BigDecimal bigDecimal = new BigDecimal("0.99");
         BigDecimal bdEthRial = bdEthUsd.multiply(bdUsdRial).multiply(bigDecimal);
 
         System.out.println("JEUSDEBUG: ======> "+bdEthRial.toString());
