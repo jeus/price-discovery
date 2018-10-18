@@ -100,7 +100,7 @@ public class PriceController {
         Price price = null;
         Price crypto = null;
         Price market = null;
-        List<Price> priceListCrypto = getPriceArzwsCrypto();
+        List<Price> priceListCrypto = getPrice();
         for (Price price1 : priceListCrypto) {
             if (price1.getCoin() == Coin.BITCOIN) {
                 crypto = price1;
