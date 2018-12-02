@@ -6,8 +6,9 @@
  * @since 2018
  */
 
-package com.b2mark.priceDiscovery.driver.adapter;
+package com.b2mark.priceDiscovery.price.driver.adapter;
 
+import com.b2mark.priceDiscovery.common.Coin;
 import com.b2mark.priceDiscovery.entity.Price;
 
 import java.util.Date;
@@ -18,8 +19,7 @@ public class Irr implements PriceAdapter {
     public Price priceToUsd() {
         Price price = new Price();
         price.setDate(new Date());
-        price.setName("United state dollar");
-        price.setSymbol("USD");
+        price.setCoin(Coin.BITCOIN);
         return price;
     }
 

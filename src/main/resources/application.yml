@@ -1,0 +1,40 @@
+info:
+  app:
+    desc: Price Discovery Service
+    name: pricediscovery
+    version: 1.0
+    license: becopay
+    contact:
+      email: info@becopay.com
+      url: http://www.becopay.com
+      name: becopay
+
+server:
+  use-forward-headers: true
+  port: 9190
+  host: price.becopay.com
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+spring:
+  cloud:
+    refresh:
+      enabled: false
+  profiles:
+    active: production
+  application:
+      name: pricediscovery
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://87.98.188.77:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5

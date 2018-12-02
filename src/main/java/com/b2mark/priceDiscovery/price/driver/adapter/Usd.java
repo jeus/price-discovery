@@ -6,11 +6,11 @@
  * @since 2018
  */
 
-package com.b2mark.priceDiscovery.driver.adapter;
+package com.b2mark.priceDiscovery.price.driver.adapter;
 
 import com.b2mark.priceDiscovery.entity.Price;
 
-public class Btc implements PriceAdapter {
+public class Usd implements PriceAdapter {
 
     @Override
     public Price priceToUsd() {
@@ -26,6 +26,4 @@ public class Btc implements PriceAdapter {
     public Price priceToBtc() {
         return null;
     }
-
-
 }

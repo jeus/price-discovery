@@ -6,7 +6,7 @@
  * @since 2018
  */
 
-package com.b2mark.priceDiscovery.driver.adapter;
+package com.b2mark.priceDiscovery.price.driver.adapter;
 
 import com.b2mark.priceDiscovery.entity.Price;
 
