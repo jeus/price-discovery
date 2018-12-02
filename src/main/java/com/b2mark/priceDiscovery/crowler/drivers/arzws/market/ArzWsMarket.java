@@ -25,7 +25,7 @@ public class ArzWsMarket extends ArzWs {
         drivername = "arzws-market";
         endpoint = "http://core.arzws.ir/api/core?Token=78cd7981-c23d-4f84-6995-08d627c4638e&what=bazarex";
         restTemplate = restTemplateBuilder.build();
-        supporterdCoin = new Coin[]{Coin.IRANRIAL,Coin.USDOLLAR,Coin.SYRIANPOUND};
+        supporterdCoin = new Coin[]{Coin.IRANRIAL,Coin.USDOLLAR,Coin.SYRIANPOUND,Coin.EURO};
         sortSupportCoin();
     }
 }

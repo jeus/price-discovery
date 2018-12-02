@@ -44,7 +44,7 @@ public class PriceController {
 
 
     @GetMapping("/btc")
-    public List<Price> getPrice() {
+    public List<Price> getBtcPrice() {
         DriverInterface driver = new CoinmarketcapV1(restTemplateBuilder);
         try {
             return driver.crowl(Coin.BITCOIN);
@@ -53,6 +53,19 @@ public class PriceController {
         }
         return null;
     }
+
+
+    @GetMapping("/eth")
+    public List<Price> getEthPrice() {
+        DriverInterface driver = new CoinmarketcapV1(restTemplateBuilder);
+        try {
+            return driver.crowl(Coin.ETHEREUM);
+        } catch (Exception ex) {
+            System.out.println("JEUSDEBUG: This is get errrroooooorrr");
+        }
+        return null;
+    }
+
 
 
     @GetMapping("/arzwsgov")
@@ -71,7 +84,7 @@ public class PriceController {
     public List<Price> getPriceArzwsMarket() {
         DriverInterface driver = new ArzWsMarket(restTemplateBuilder);
         try {
-            return driver.crowl(Coin.USDOLLAR);
+            return driver.crowl(Coin.USDOLLAR,Coin.EURO);
         } catch (Exception ex) {
             System.out.println("JEUSDEBUG: This is get errrroooooorrr");
         }
@@ -97,10 +110,10 @@ public class PriceController {
     @GetMapping("/btcirr")
     public Price getBtcRial() {
 
-        Price price = null;
+        Price price;
         Price crypto = null;
         Price market = null;
-        List<Price> priceListCrypto = getPrice();
+        List<Price> priceListCrypto = getBtcPrice();
         for (Price price1 : priceListCrypto) {
             if (price1.getCoin() == Coin.BITCOIN) {
                 crypto = price1;
@@ -129,17 +142,16 @@ public class PriceController {
         price.setPrice(bdBtcRial.toString());
 
         return price;
-
     }
 
 
     @GetMapping("/ethirr")
     public Price getEthRial() {
 
-        Price price = null;
+        Price price;
         Price crypto = null;
         Price market = null;
-        List<Price> priceListCrypto = getPriceArzwsCrypto();
+        List<Price> priceListCrypto = getEthPrice();
         for (Price price1 : priceListCrypto) {
             if (price1.getCoin() == Coin.ETHEREUM) {
                 crypto = price1;
@@ -168,6 +180,38 @@ public class PriceController {
         price.setPrice(bdEthRial.toString());
 
         return price;
+    }
+
+
+    @GetMapping("/usdirr")
+    public Price getUsdollarRial(){
+
+        Price market = null;
+
+        List<Price> pricesMarket = getPriceArzwsMarket();
+        for (Price price1 : pricesMarket) {
+            if (price1.getCoin() == Coin.USDOLLAR) {
+                market = price1;
+            }
+        }
+
+        return market;
+
+    }
+
+    @GetMapping("/eurirr")
+    public Price getEuroRial(){
+
+        Price market = null;
+
+        List<Price> pricesMarket = getPriceArzwsMarket();
+        for (Price price1 : pricesMarket) {
+            if (price1.getCoin() == Coin.EURO) {
+                market = price1;
+            }
+        }
+
+        return market;
     }
 
     @GetMapping("/check")

@@ -65,8 +65,13 @@ public abstract class ArzWs extends Driver implements DriverInterface {
         } catch (Exception ex) {
             System.out.println("JEUSDEBUG: ERROR   " + ex.getMessage());
         }
-        System.out.println("JEUSDEBUG:     " + arzwsGovEntity.getExchangeRate().toString());
+        List<Coin> listCoin = Arrays.asList(coins);
         for (ExchangeRate exchangeRate : arzwsGovEntity.getExchangeRate()) {
+            String symbol = exchangeRate.getIcon().length() > 3 ? map.get(exchangeRate.getIcon()) : exchangeRate.getIcon();
+            if(!listCoin.contains(Coin.fromSymbol(symbol))) {
+                continue;
+            }
+            exchangeRate.setIcon(symbol);
             Price price = convertToPrice(exchangeRate);
             if (price != null) {
                 prices.add(price);
@@ -77,9 +82,9 @@ public abstract class ArzWs extends Driver implements DriverInterface {
 
     private Price convertToPrice(ExchangeRate exchangeRate) {
         Price price = new Price();
-        Coin sourceCoin = Coin.fromSymbol(exchangeRate.getIcon().length() > 3 ? map.get(exchangeRate.getIcon()) : exchangeRate.getIcon());
-        Coin destCoin = Coin.IRANRIAL;
-        if(drivername.equals("arzws-crypto")){ destCoin = Coin.USDOLLAR;}
+        String symbol = exchangeRate.getIcon().length() > 3 ? map.get(exchangeRate.getIcon()) : exchangeRate.getIcon();
+        Coin sourceCoin = Coin.fromSymbol(symbol);
+        Coin destCoin = drivername.equals("arzws-crypto") ? Coin.USDOLLAR : Coin.IRANRIAL;
         if (sourceCoin != null && isSupport(sourceCoin) > 0) {
             Date date = new Date((exchangeRate.getDateSerial() - TICKS_AT_EPOCH) / TICKS_PER_MILLISECOND);
             price.setDate(date);

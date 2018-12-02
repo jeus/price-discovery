@@ -23,15 +23,15 @@ public class CoinmarketcapV1 extends Driver implements DriverInterface {
     public CoinmarketcapV1(RestTemplateBuilder restTemplateBuilder) {
         super();
         drivername = "coinmarketcap-v1";
-        endpoint = "https://api.coinmarketcap.com/v1/ticker/bitcoin/";
+        endpoint = "https://api.coinmarketcap.com/v1/ticker/%s/";
         restTemplate = restTemplateBuilder.build();
         supporterdCoin = new Coin[]{Coin.BITCOIN,Coin.ETHEREUM};
         sortSupportCoin();
     }
 
     @Override
-    public List<Price> crowl(Coin... prices) {
-            return getPrices(prices);
+    public List<Price> crowl(Coin... coins) {
+            return getPrices(coins);
     }
 
     private List<Price> getPrices(Coin... coins)  {
@@ -41,7 +41,11 @@ public class CoinmarketcapV1 extends Driver implements DriverInterface {
             if(isSupport(coins1) > 0) {
                 Coinmarketcap[] coinmarketcap = null;
                 try {
-                     coinmarketcap = restTemplate.getForObject(endpoint, Coinmarketcap[].class);
+                    StringBuilder sbuf = new StringBuilder();
+                    Formatter fmt = new Formatter(sbuf);
+                    fmt.format(endpoint, coins1.getName());
+                    String endpoint1 = sbuf.toString();
+                    coinmarketcap = restTemplate.getForObject(endpoint1, Coinmarketcap[].class);
                 }catch (Exception ex)
                 {
                     System.out.println("JEUSDEBUG: ERROR   "+ex.getMessage());
