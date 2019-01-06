@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -48,48 +49,55 @@ import java.util.Date;
 @Getter
 public class Coinmarketcap {
 
-        @JsonProperty("id")
-        private String id;
-        @JsonProperty("name")
-        private String name;
-        @JsonProperty("symbol")
-        private String symbol;
-        @JsonProperty("rank")
-        private String rank;
-        @JsonProperty("price_usd")
-        private String priceUsd;
-        @JsonProperty("price_btc")
-        private String priceBtc;
-        @JsonProperty("24h_volume_usd")
-        private String _24hVolumeUsd;
-        @JsonProperty("market_cap_usd")
-        private String marketCapUsd;
-        @JsonProperty("available_supply")
-        private String availableSupply;
-        @JsonProperty("total_supply")
-        private String totalSupply;
-        @JsonProperty("max_supply")
-        private String maxSupply;
-        @JsonProperty("percent_change_1h")
-        private String percentChange1h;
-        @JsonProperty("percent_change_24h")
-        private String percentChange24h;
-        @JsonProperty("percent_change_7d")
-        private String percentChange7d;
-        @JsonProperty("last_updated")
-        private String lastUpdated;
-        @JsonIgnore
-        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("symbol")
+    private String symbol;
+    @JsonProperty("rank")
+    private String rank;
+    @JsonProperty("price_usd")
+    private String priceUsd;
+    @JsonProperty("price_btc")
+    private String priceBtc;
+    @JsonProperty("24h_volume_usd")
+    private String _24hVolumeUsd;
+    @JsonProperty("market_cap_usd")
+    private String marketCapUsd;
+    @JsonProperty("available_supply")
+    private String availableSupply;
+    @JsonProperty("total_supply")
+    private String totalSupply;
+    @JsonProperty("max_supply")
+    private String maxSupply;
+    @JsonProperty("percent_change_1h")
+    private String percentChange1h;
+    @JsonProperty("percent_change_24h")
+    private String percentChange24h;
+    @JsonProperty("percent_change_7d")
+    private String percentChange7d;
+    @JsonProperty("last_updated")
+    private String lastUpdated;
+    @JsonProperty("price_eur")
+    private String priceEur;
+    @JsonProperty("24h_volume_eur")
+    private String _24VolumeEur;
+    @JsonProperty("market_cap_eur")
+    private String marketCapEur;
 
-        @JsonAnyGetter
-        public Map<String, Object> getAdditionalProperties() {
-            return this.additionalProperties;
-        }
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-        @JsonAnySetter
-        public void setAdditionalProperty(String name, Object value) {
-            this.additionalProperties.put(name, value);
-        }
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
 
 
     @Override
@@ -99,27 +107,30 @@ public class Coinmarketcap {
     }
 
 
-    public Date getLastUpdated()
-    {
+    public Date getLastUpdated() {
         long longDate = Long.parseLong(lastUpdated);
-        System.out.println("JEUSDEBUG:        LOOOOOOOOOOONG: "+longDate);
-                Date date = new Date();
-        System.out.println("JEUSDEBUG: LOøøøøøøøøøNg:"+date.getTime());
-        date.setTime(longDate*1000);
+        System.out.println("JEUSDEBUG:        LOOOOOOOOOOONG: " + longDate);
+        Date date = new Date();
+        System.out.println("JEUSDEBUG: LOøøøøøøøøøNg:" + date.getTime());
+        date.setTime(longDate * 1000);
 
-        System.out.println("JEUSDEBUG: DATE––––––––––––≥≥≥≥≥≥≥ "+ date);
-        return  date;
+        System.out.println("JEUSDEBUG: DATE––––––––––––≥≥≥≥≥≥≥ " + date);
+        return date;
     }
 
     @JsonIgnoreProperties
-    public Coin getCoin()
-    {
+    public Coin getCoin() {
         return Coin.fromSymbol(symbol);
     }
 
-    @JsonIgnoreProperties
-    public Coin getDestCoin()
-    {
-        return Coin.fromSymbol("USD");
+
+    public String getPrice(Coin toCoin) {
+        switch (toCoin) {
+            case USDOLLAR:
+                return priceUsd;
+            case EURO:
+                return priceEur;
+        }
+        return null;
     }
 }

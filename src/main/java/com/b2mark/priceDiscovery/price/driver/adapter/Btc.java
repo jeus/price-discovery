@@ -25,7 +25,7 @@ public class Btc implements PriceAdapter {
     @Override
     public Price priceToUsd() {
         Price price = new Price();
-        List<Price> priceList = priceController.getPriceArzwsCrypto();
+        List<Price> priceList = priceController.getArzwsCrypto();
         for (Price price1 : priceList) {
             if (price1.getCoin() == Coin.BITCOIN) {
                 price = price1;
