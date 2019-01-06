@@ -19,15 +19,20 @@ import java.util.*;
 
 public class CoinmarketcapV1 extends Driver implements DriverInterface {
 
+    private Coin toCoin;
 
     public CoinmarketcapV1(RestTemplateBuilder restTemplateBuilder) {
         super();
         drivername = "coinmarketcap-v1";
-        endpoint = "https://api.coinmarketcap.com/v1/ticker/%s/";
+        endpoint = "https://api.coinmarketcap.com/v1/ticker/%s?convert=%s";
         restTemplate = restTemplateBuilder.build();
         supporterdCoin = new Coin[]{Coin.BITCOIN,Coin.ETHEREUM};
         sortSupportCoin();
+        toCoin = Coin.USDOLLAR;
     }
+
+    public void setToCoin(Coin coin)
+    {toCoin = coin;}
 
     @Override
     public List<Price> crowl(Coin... coins) {
@@ -43,30 +48,33 @@ public class CoinmarketcapV1 extends Driver implements DriverInterface {
                 try {
                     StringBuilder sbuf = new StringBuilder();
                     Formatter fmt = new Formatter(sbuf);
-                    fmt.format(endpoint, coins1.getName());
+                    fmt.format(endpoint, coins1.getName(),toCoin.getSymbol());
                     String endpoint1 = sbuf.toString();
                     coinmarketcap = restTemplate.getForObject(endpoint1, Coinmarketcap[].class);
-                }catch (Exception ex)
-                {
+                }catch (Exception ex) {
                     System.out.println("JEUSDEBUG: ERROR   "+ex.getMessage());
                 }
-                Price price = convertToPrice(coinmarketcap[0]);
+                Price price = convertToPrice(coinmarketcap[0],toCoin);
                 prices.add(price);
             }
         }
         return prices;
     }
 
-    private Price convertToPrice(Coinmarketcap coinmarketcap)
+    private Price convertToPrice(Coinmarketcap coinmarketcap,Coin toCoin)
     {
         Price price = new Price();
         Date date = coinmarketcap.getLastUpdated();
         System.out.println("last_Update:"+date);
         price.setDate(date);
         price.setCoin(coinmarketcap.getCoin());
-        price.setPrice(coinmarketcap.getPriceUsd());
-        price.setDestCoin(coinmarketcap.getDestCoin());
+        price.setPrice(coinmarketcap.getPrice(toCoin));
+        price.setDestCoin(toCoin);
         price.setDriverName(drivername);
         return price;
     }
+
+
+
+
 }
