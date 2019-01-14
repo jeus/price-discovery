@@ -17,7 +17,7 @@ public class NerkhApiDriversCurrency extends NerkhApiDrivers {
     public NerkhApiDriversCurrency(RestTemplateBuilder restTemplateBuilder) {
         super();
         drivername = "nerkhapi-currency";
-        endpoint = "http://nerkh-api.ir/api/9ab7a2acea8b515288e741915dfc3b2f/currency/";
+        endpoint = "http://api.backino.net/nerkhapi/api/28178b4dc903566dc47418845963a54e/currency/";
         restTemplate = restTemplateBuilder.build();
         supporterdCoin = new Coin[]{Coin.USDOLLAR,Coin.SYRIANPOUND,Coin.EURO};
         sortSupportCoin();
